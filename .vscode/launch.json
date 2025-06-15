@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:szyna-v}",
+            "name": "Debug SzynaV",
+            "program": "${workspaceFolder:szyna-v}/.build/debug/SzynaV",
+            "preLaunchTask": "swift: Build Debug SzynaV"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:szyna-v}",
+            "name": "Release SzynaV",
+            "program": "${workspaceFolder:szyna-v}/.build/release/SzynaV",
+            "preLaunchTask": "swift: Build Release SzynaV"
+        }
+    ]
+}
