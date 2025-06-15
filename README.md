@@ -18,10 +18,33 @@
 ### Prerequisites
 
 - Swift 6.1+
-- Tailwind CSS CLI (installed via Homebrew)
+- Tailwind CSS CLI
 
+#### Installing Tailwind CSS CLI
+
+**macOS (Homebrew):**
 ```bash
 brew install tailwindcss
+```
+
+**Linux/FreeBSD (Standalone Binary):**
+```bash
+# Download the latest release for your platform
+# Linux x64:
+curl -sL https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-linux-x64 -o tailwindcss
+# Linux arm64:
+# curl -sL https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-linux-arm64 -o tailwindcss
+
+# Make it executable
+chmod +x tailwindcss
+
+# Move to a directory in your PATH
+sudo mv tailwindcss /usr/local/bin/
+```
+
+**Alternative: NPM (Cross-platform):**
+```bash
+npm install -g tailwindcss
 ```
 
 ### Building the Project
@@ -94,10 +117,29 @@ swift test
 
 ## Production Deployment
 
+### Native Deployment
+
 1. Build CSS assets: `./build-css.sh`
 2. Build Swift project: `swift build -c release`
 3. Run migrations: `swift run -c release SzynaV migrate`
 4. Start server: `swift run -c release`
+
+### Docker Deployment
+
+The Dockerfile automatically handles Tailwind CSS installation and CSS building:
+
+```bash
+# Build the Docker image
+docker build -t szyna-v .
+
+# Run with Docker Compose (includes database)
+docker-compose up -d
+```
+
+The Docker build process automatically:
+- Installs Tailwind CSS via NPM
+- Builds the CSS assets during the build phase
+- Creates an optimized production image
 
 ## See More
 
