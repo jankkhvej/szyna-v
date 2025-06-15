@@ -51,7 +51,7 @@
 
             <!-- Todos List -->
             <div class="space-y-4">
-                #if(todos):
+                #if(count(todos) > 0):
                     #for(todo in todos):
                         <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700 todo-item" data-id="#(todo.id)">
                             <div class="flex items-center justify-between">
