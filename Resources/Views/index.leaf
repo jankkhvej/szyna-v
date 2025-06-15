@@ -1,12 +1,56 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-
-  <title>#(title)</title>
-</head>
-
-<body>
-  <h1>#(title)</h1>
-</body>
-</html>
+#extend("base"):
+    #export("body"):
+        <div class="text-center">
+            <div class="max-w-3xl mx-auto">
+                <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-6">
+                    Welcome to SzynaV
+                </h1>
+                <p class="text-xl text-gray-600 dark:text-gray-300 mb-8">
+                    A modern Swift Vapor application with Fluent database, Leaf templating, and Tailwind CSS.
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+                            Todo Management
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">
+                            Manage your tasks with our simple todo application.
+                        </p>
+                        <a href="/todos" class="inline-flex items-center px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-md transition-colors">
+                            View Todos
+                            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+                            API Documentation
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">
+                            Explore the REST API endpoints for todo management.
+                        </p>
+                        <a href="/api/docs" class="inline-flex items-center px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white font-medium rounded-md transition-colors">
+                            View API
+                            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="bg-primary-50 dark:bg-primary-900/20 rounded-lg p-6 border border-primary-200 dark:border-primary-800">
+                    <h3 class="text-lg font-semibold text-primary-900 dark:text-primary-100 mb-2">
+                        Getting Started
+                    </h3>
+                    <p class="text-primary-800 dark:text-primary-200">
+                        This application demonstrates modern Swift web development with Vapor 4, 
+                        featuring cross-platform support, automatic dark/light themes, and responsive design.
+                    </p>
+                </div>
+            </div>
+        </div>
+    #endexport
+#endextend

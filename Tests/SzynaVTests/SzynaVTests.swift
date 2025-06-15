@@ -30,45 +30,63 @@ struct SzynaVTests {
         }
     }
     
-    @Test("Getting all the Todos")
+    @Test("Getting all the Todos via API")
     func getAllTodos() async throws {
         try await withApp { app in
             let sampleTodos = [Todo(title: "sample1"), Todo(title: "sample2")]
             try await sampleTodos.create(on: app.db)
             
-            try await app.testing().test(.GET, "todos", afterResponse: { res async throws in
+            try await app.testing().test(.GET, "api/todos", afterResponse: { res async throws in
                 #expect(res.status == .ok)
-                #expect(try res.content.decode([TodoDTO].self) == sampleTodos.map { $0.toDTO()} )
+                let responseTodos = try res.content.decode([TodoDTO].self)
+                #expect(responseTodos.count == 2)
+                let titles = responseTodos.compactMap { $0.title }
+                #expect(titles.contains("sample1"))
+                #expect(titles.contains("sample2"))
             })
         }
     }
     
-    @Test("Creating a Todo")
+    @Test("Creating a Todo via API")
     func createTodo() async throws {
-        let newDTO = TodoDTO(id: nil, title: "test")
+        let newDTO = TodoDTO(id: nil, title: "test", createdAt: nil, updatedAt: nil)
         
         try await withApp { app in
-            try await app.testing().test(.POST, "todos", beforeRequest: { req in
+            try await app.testing().test(.POST, "api/todos", beforeRequest: { req in
                 try req.content.encode(newDTO)
             }, afterResponse: { res async throws in
                 #expect(res.status == .ok)
                 let models = try await Todo.query(on: app.db).all()
-                #expect(models.map({ $0.toDTO().title }) == [newDTO.title])
+                #expect(models.map({ $0.title }) == [newDTO.title])
             })
         }
     }
     
-    @Test("Deleting a Todo")
+    @Test("Deleting a Todo via API")
     func deleteTodo() async throws {
         let testTodos = [Todo(title: "test1"), Todo(title: "test2")]
         
         try await withApp { app in
             try await testTodos.create(on: app.db)
             
-            try await app.testing().test(.DELETE, "todos/\(testTodos[0].requireID())", afterResponse: { res async throws in
+            try await app.testing().test(.DELETE, "api/todos/\(testTodos[0].requireID())", afterResponse: { res async throws in
                 #expect(res.status == .noContent)
                 let model = try await Todo.find(testTodos[0].id, on: app.db)
                 #expect(model == nil)
+            })
+        }
+    }
+    
+    @Test("Web Todo Index Page")
+    func webTodoIndex() async throws {
+        try await withApp { app in
+            let todo1 = Todo(title: "sample1")
+            let todo2 = Todo(title: "sample2")
+            try await [todo1, todo2].create(on: app.db)
+            
+            try await app.testing().test(.GET, "todos", afterResponse: { res async in
+                #expect(res.status == .ok)
+                #expect(res.headers.contentType == .html)
             })
         }
     }

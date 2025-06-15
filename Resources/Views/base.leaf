@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#(title) - SzynaV</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Theme Configuration -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Theme Script - Must run before body renders -->
+    <script>
+        // Theme management
+        function getThemePreference() {
+            if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+                return localStorage.getItem('theme');
+            }
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+            localStorage.setItem('theme', theme);
+        }
+        
+        // Set initial theme
+        setTheme(getThemePreference());
+        
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                setTheme(e.matches ? 'dark' : 'light');
+            }
+        });
+    </script>
+    
+    <!-- Custom Styles -->
+    <style>
+        /* Smooth transitions for theme changes */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            @apply bg-gray-100 dark:bg-gray-800;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            @apply bg-gray-300 dark:bg-gray-600 rounded-full;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            @apply bg-gray-400 dark:bg-gray-500;
+        }
+    </style>
+    
+    #if(additionalHead):
+        #(additionalHead)
+    #endif
+</head>
+<body class="h-full bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+    <!-- Navigation -->
+    <nav class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo/Brand -->
+                <div class="flex items-center">
+                    <a href="/" class="text-xl font-bold text-primary-600 dark:text-primary-400">
+                        SzynaV
+                    </a>
+                </div>
+                
+                <!-- Navigation Links -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        #if(navItems):
+                            #for(item in navItems):
+                                <a href="#(item.url)" 
+                                   class="px-3 py-2 rounded-md text-sm font-medium 
+                                          #if(item.active):text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20
+                                          #else:text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-700#endif">
+                                    #(item.title)
+                                </a>
+                            #endfor
+                        #endif
+                    </div>
+                </div>
+                
+                <!-- Theme Toggle & Mobile Menu -->
+                <div class="flex items-center space-x-4">
+                    <!-- Theme Toggle Button -->
+                    <button id="theme-toggle" 
+                            class="p-2 rounded-md text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                            aria-label="Toggle theme">
+                        <!-- Sun icon (visible in dark mode) -->
+                        <svg id="sun-icon" class="hidden dark:block w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                        <!-- Moon icon (visible in light mode) -->
+                        <svg id="moon-icon" class="block dark:hidden w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                        </svg>
+                    </button>
+                    
+                    <!-- Mobile menu button -->
+                    <button id="mobile-menu-button" 
+                            class="md:hidden p-2 rounded-md text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                            aria-label="Toggle mobile menu">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-gray-50 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+                #if(navItems):
+                    #for(item in navItems):
+                        <a href="#(item.url)" 
+                           class="block px-3 py-2 rounded-md text-base font-medium 
+                                  #if(item.active):text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20
+                                  #else:text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-100 dark:hover:bg-gray-700#endif">
+                            #(item.title)
+                        </a>
+                    #endfor
+                #endif
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main class="flex-1">
+        #if(showHeader):
+            <header class="bg-white dark:bg-gray-800 shadow-sm">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    <h1 class="text-3xl font-bold text-gray-900 dark:text-white">#(title)</h1>
+                    #if(subtitle):
+                        <p class="mt-2 text-gray-600 dark:text-gray-400">#(subtitle)</p>
+                    #endif
+                </div>
+            </header>
+        #endif
+        
+        <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+            #if(showFlashMessages):
+                <!-- Flash Messages -->
+                <div id="flash-messages" class="mb-6">
+                    #if(successMessage):
+                        <div class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-md p-4 mb-4">
+                            <div class="flex">
+                                <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <p class="ml-3 text-sm text-green-800 dark:text-green-200">#(successMessage)</p>
+                            </div>
+                        </div>
+                    #endif
+                    
+                    #if(errorMessage):
+                        <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md p-4 mb-4">
+                            <div class="flex">
+                                <svg class="w-5 h-5 text-red-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                                </svg>
+                                <p class="ml-3 text-sm text-red-800 dark:text-red-200">#(errorMessage)</p>
+                            </div>
+                        </div>
+                    #endif
+                    
+                    #if(infoMessage):
+                        <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-md p-4 mb-4">
+                            <div class="flex">
+                                <svg class="w-5 h-5 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                                </svg>
+                                <p class="ml-3 text-sm text-blue-800 dark:text-blue-200">#(infoMessage)</p>
+                            </div>
+                        </div>
+                    #endif
+                </div>
+            #endif
+            
+            <!-- Page Content -->
+            <div class="px-4 py-6 sm:px-0">
+                #import("body")
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center">
+                <p class="text-sm text-gray-500 dark:text-gray-400">
+                    © #date(now, "yyyy") SzynaV. All rights reserved.
+                </p>
+                <div class="flex space-x-6">
+                    #if(footerLinks):
+                        #for(link in footerLinks):
+                            <a href="#(link.url)" class="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200">
+                                #(link.title)
+                            </a>
+                        #endfor
+                    #endif
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script>
+        // Theme toggle functionality
+        document.getElementById('theme-toggle').addEventListener('click', function() {
+            const currentTheme = localStorage.getItem('theme') || 
+                (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        });
+        
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Auto-hide flash messages after 5 seconds
+        setTimeout(function() {
+            const flashMessages = document.getElementById('flash-messages');
+            if (flashMessages && flashMessages.children.length > 0) {
+                flashMessages.style.opacity = '0';
+                setTimeout(function() {
+                    flashMessages.style.display = 'none';
+                }, 300);
+            }
+        }, 5000);
+    </script>
+    
+    #if(additionalScripts):
+        #(additionalScripts)
+    #endif
+</body>
+</html> 
