@@ -35,7 +35,8 @@ func indexHandler(req: Request) async throws -> View {
         showFlashMessages: false,
         navItems: [
             NavItem(title: "Home", url: "/", active: true),
-            NavItem(title: "Todos", url: "/todos", active: false)
+            NavItem(title: "Todos", url: "/todos", active: false),
+            NavItem(title: "API Docs", url: "/api/docs", active: false)
         ],
         now: Date()
     )

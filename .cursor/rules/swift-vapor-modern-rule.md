@@ -33,6 +33,41 @@ Swift 6.1 project using Vapor 4 framework with:
 - Leaf: ^4.3.0
 - SwiftNIO: ^2.65.0
 
+## Third-Party Tools and Build Systems
+
+### STRICTLY PROHIBITED
+- **Node.js, npm, yarn, pnpm** - JavaScript toolchains are HIGHLY DISCOURAGED
+- **Webpack, Vite, Rollup, Parcel** - JavaScript build tools are forbidden
+- **Any JavaScript framework** for build processes (React, Vue, Angular build tools)
+- **Third-party binaries from any source** - No direct downloads from GitHub releases, websites, or curl installs
+- **Package managers other than Homebrew** - No manual binary installations
+
+### REQUIRED APPROACH
+- **Homebrew ONLY** for all third-party tool installations
+- **System package managers** on Linux (apt, yum, pacman) as secondary option
+- **Swift Package Manager** for Swift dependencies only
+- **Native tools** whenever possible (prefer Swift/system tools over external dependencies)
+
+### CSS/Frontend Build Process
+- Use **Tailwind CSS CLI via Homebrew**: `brew install tailwindcss`
+- Generate production-ready CSS with local build scripts
+- NO CDN dependencies in production
+- Build scripts: `build-css.sh` and `watch-css.sh` for development
+- CSS output: `Public/css/styles.css` (served as static asset)
+
+### Approved Installation Methods
+```bash
+# ✅ CORRECT - Use Homebrew
+brew install tailwindcss
+brew install imagemagick
+brew install sqlite
+
+# ❌ WRONG - Never do this
+curl -sL https://example.com/binary | bash
+npm install -g some-tool
+wget https://releases.github.com/tool/binary
+```
+
 ## Development Guidelines
 
 ### Models
@@ -127,8 +162,10 @@ struct UserController: RouteCollection {
 ### Views
 - Use Leaf templates for server-side rendering
 - Organize templates in logical directories
-- Use Tailwind CSS classes for styling
+- Use Tailwind CSS classes for styling (locally built, NO CDN)
 - Keep templates DRY using Leaf's template inheritance
+- Reference local CSS: `<link rel="stylesheet" href="/css/styles.css">`
+- NEVER use CDN links like `cdn.tailwindcss.com`
 
 Example:
 ```html
@@ -143,6 +180,12 @@ Example:
     </div>
 }
 ```
+
+### CSS Build Process
+- Build CSS before deployment: `./build-css.sh`
+- Development with auto-rebuild: `./watch-css.sh`
+- CSS file served from: `Public/css/styles.css`
+- Use standard Tailwind classes (blue-* instead of custom primary-* colors)
 
 ### Testing
 - Write unit tests for business logic
@@ -206,6 +249,48 @@ Example:
 - Use environment-specific configurations
 - Follow CI/CD best practices
 
+## Development Workflow
+
+### Project Setup
+1. **Install dependencies via Homebrew ONLY**:
+   ```bash
+   brew install tailwindcss
+   ```
+
+2. **Build CSS assets** (required before running):
+   ```bash
+   ./build-css.sh
+   ```
+
+3. **Run database migrations**:
+   ```bash
+   swift run SzynaV migrate
+   ```
+
+4. **Start development**:
+   ```bash
+   # Terminal 1: Watch CSS changes
+   ./watch-css.sh
+   
+   # Terminal 2: Run server
+   swift run
+   ```
+
+### Production Deployment
+1. Build CSS: `./build-css.sh`
+2. Build Swift: `swift build -c release`
+3. Run migrations: `swift run -c release SzynaV migrate`
+4. Start server: `swift run -c release`
+
+### File Structure Requirements
+```
+.
+├── Public/css/styles.css    # Generated CSS (never commit source)
+├── build-css.sh            # CSS build script
+├── watch-css.sh            # CSS watch script
+└── Resources/Views/        # Templates with local CSS references
+```
+
 ## Best Practices
 1. Use Swift's type system effectively
 2. Follow SOLID principles
@@ -216,4 +301,8 @@ Example:
 7. Use proper error handling
 8. Implement logging for debugging
 9. Follow RESTful API design principles
-10. Use proper HTTP methods and status codes 
+10. Use proper HTTP methods and status codes
+11. **NEVER introduce JavaScript toolchains**
+12. **Always use Homebrew for third-party tools**
+13. **Build CSS locally, never use CDNs in production**
+14. **Prefer native Swift solutions over external dependencies** 

@@ -1,15 +1,15 @@
 #extend("base"):
     #export("body"):
         <!-- Hero Section -->
-        <div class="bg-gradient-to-r from-primary-600 to-primary-700 dark:from-primary-700 dark:to-primary-800 rounded-lg shadow-lg p-8 mb-8">
+        <div class="bg-gradient-to-r from-blue-600 to-blue-700 dark:from-blue-700 dark:to-blue-800 rounded-lg shadow-lg p-8 mb-8">
             <div class="text-center">
                 <h1 class="text-4xl font-bold text-white mb-4">Welcome to SzynaV</h1>
-                <p class="text-xl text-primary-100 mb-6">A modern Swift Vapor application with Tailwind CSS</p>
+                <p class="text-xl text-blue-100 mb-6">A modern Swift Vapor application with Tailwind CSS</p>
                 <div class="space-x-4">
-                    <a href="/about" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors">
+                    <a href="/about" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-blue-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
                         Learn More
                     </a>
-                    <a href="/contact" class="inline-flex items-center px-6 py-3 border border-white text-base font-medium rounded-md text-white bg-transparent hover:bg-white hover:text-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white transition-colors">
+                    <a href="/contact" class="inline-flex items-center px-6 py-3 border border-white text-base font-medium rounded-md text-white bg-transparent hover:bg-white hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white transition-colors">
                         Get Started
                     </a>
                 </div>
@@ -21,7 +21,7 @@
             <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
                 <div class="flex items-center mb-4">
                     <div class="flex-shrink-0">
-                        <svg class="w-8 h-8 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-8 h-8 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                         </svg>
                     </div>
@@ -33,7 +33,7 @@
             <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
                 <div class="flex items-center mb-4">
                     <div class="flex-shrink-0">
-                        <svg class="w-8 h-8 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-8 h-8 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                         </svg>
                     </div>
@@ -45,7 +45,7 @@
             <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
                 <div class="flex items-center mb-4">
                     <div class="flex-shrink-0">
-                        <svg class="w-8 h-8 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-8 h-8 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
                         </svg>
                     </div>
@@ -60,19 +60,19 @@
             <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">Project Statistics</h2>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
                 <div class="text-center">
-                    <div class="text-3xl font-bold text-primary-600 dark:text-primary-400">Swift 6.1</div>
+                    <div class="text-3xl font-bold text-blue-600 dark:text-blue-400">Swift 6.1</div>
                     <div class="text-sm text-gray-600 dark:text-gray-400">Language Version</div>
                 </div>
                 <div class="text-center">
-                    <div class="text-3xl font-bold text-primary-600 dark:text-primary-400">Vapor 4</div>
+                    <div class="text-3xl font-bold text-blue-600 dark:text-blue-400">Vapor 4</div>
                     <div class="text-sm text-gray-600 dark:text-gray-400">Framework</div>
                 </div>
                 <div class="text-center">
-                    <div class="text-3xl font-bold text-primary-600 dark:text-primary-400">SQLite</div>
+                    <div class="text-3xl font-bold text-blue-600 dark:text-blue-400">SQLite</div>
                     <div class="text-sm text-gray-600 dark:text-gray-400">Database</div>
                 </div>
                 <div class="text-center">
-                    <div class="text-3xl font-bold text-primary-600 dark:text-primary-400">Tailwind</div>
+                    <div class="text-3xl font-bold text-blue-600 dark:text-blue-400">Tailwind</div>
                     <div class="text-sm text-gray-600 dark:text-gray-400">CSS Framework</div>
                 </div>
             </div>

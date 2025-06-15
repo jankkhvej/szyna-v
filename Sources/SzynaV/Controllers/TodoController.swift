@@ -53,7 +53,8 @@ struct TodoController: RouteCollection {
             showFlashMessages: true,
             navItems: [
                 NavItem(title: "Home", url: "/", active: false),
-                NavItem(title: "Todos", url: "/todos", active: true)
+                NavItem(title: "Todos", url: "/todos", active: true),
+                NavItem(title: "API Docs", url: "/api/docs", active: false)
             ],
             now: Date()
         )

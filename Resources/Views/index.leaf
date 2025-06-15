@@ -17,7 +17,7 @@
                         <p class="text-gray-600 dark:text-gray-300 mb-4">
                             Manage your tasks with our simple todo application.
                         </p>
-                        <a href="/todos" class="inline-flex items-center px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-md transition-colors">
+                        <a href="/todos" class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md transition-colors">
                             View Todos
                             <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -41,11 +41,11 @@
                     </div>
                 </div>
                 
-                <div class="bg-primary-50 dark:bg-primary-900/20 rounded-lg p-6 border border-primary-200 dark:border-primary-800">
-                    <h3 class="text-lg font-semibold text-primary-900 dark:text-primary-100 mb-2">
+                <div class="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-6 border border-blue-200 dark:border-blue-800">
+                    <h3 class="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-2">
                         Getting Started
                     </h3>
-                    <p class="text-primary-800 dark:text-primary-200">
+                    <p class="text-blue-800 dark:text-blue-200">
                         This application demonstrates modern Swift web development with Vapor 4, 
                         featuring cross-platform support, automatic dark/light themes, and responsive design.
                     </p>
